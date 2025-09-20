@@ -1,0 +1,352 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 2rem 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Main container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+}
+
+/* Neural Network Visualization */
+.neural-network {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    min-height: 500px;
+    grid-column: span 2;
+}
+
+/* Layers */
+.layer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.layer h3 {
+    margin-bottom: 2rem;
+    color: #444;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.nodes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Nodes */
+.node {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 3px solid;
+}
+
+.node-label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.node-value {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Input nodes */
+.input-node {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    border-color: #45a049;
+    color: white;
+}
+
+.input-node:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+/* Hidden nodes */
+.hidden-node {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    border-color: #1976D2;
+    color: white;
+}
+
+.hidden-node:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+}
+
+/* Output nodes */
+.output-node {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    border-color: #F57C00;
+    color: white;
+}
+
+.output-node:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+
+/* Connections SVG */
+.connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.connection-line {
+    stroke: #666;
+    stroke-width: 2;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.connection-line.active {
+    stroke: #ff4757;
+    stroke-width: 3;
+    opacity: 1;
+}
+
+/* Controls */
+.controls {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.controls h3 {
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.input-controls {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.input-controls label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.input-controls input[type="range"] {
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+.input-display {
+    font-weight: bold;
+    color: #4CAF50;
+    text-align: center;
+}
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#calculate {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+#calculate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+#reset {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+#reset:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+}
+
+/* Info section */
+.info {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info h3 {
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.info-content ul, .info-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.info-content p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: white;
+    opacity: 0.8;
+    margin-top: 2rem;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.node.active {
+    animation: pulse 1s infinite;
+}
+
+.node.processing {
+    background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+    background-size: 400% 400%;
+    animation: gradient-shift 2s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+    
+    .neural-network {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .neural-network {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1rem;
+    }
+    
+    .layer {
+        width: 100%;
+    }
+    
+    .nodes {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .node {
+        width: 60px;
+        height: 60px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+/* Tooltip */
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tooltip.show {
+    opacity: 1;
+}
