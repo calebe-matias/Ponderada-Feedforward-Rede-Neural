@@ -130,7 +130,8 @@ Em termos numéricos, as probabilidades finais (após a sigmoide) para cada fras
 
 Para visualização da arquitetura (entrada BoW → neurônios da 1ª camada → ativações sigmoides), segue um diagrama **Mermaid** que deixa explícitas as conexões e os pesos principais:
 
-```graph LR
+```mermaid
+graph LR
   %% Entradas (Bag-of-Words)
   subgraph Input
     direction TB
