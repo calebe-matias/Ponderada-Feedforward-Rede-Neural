@@ -2,13 +2,13 @@
 
 ## Contexto do Enunciado
 
-Foi proposta à turma uma Ponderada de Feedforward de Redes Neurais na aula de Funções de Ativação (Semana 07). Devemos calcular a saída da primeira camada de uma rede neural que utiliza Bag-of-Words (BoW) para classificar se um trecho de texto apresenta indícios de acessibilidade auditiva e/ou acessibilidade visual. O vocabulário do BoW contém cinco termos, nesta ordem: libras, legenda, descrição, leitor\_tela e deficiência. Cada frase é representada como um vetor binário de cinco posições, indicando presença (1) ou ausência (0) de cada palavra do vocabulário.
+Foi proposta à turma uma Ponderada de Feedforward de Redes Neurais na aula de Funções de Ativação (Semana 07). Devemos calcular a saída da primeira camada de uma rede neural que utiliza Bag-of-Words (BoW) para classificar se um trecho de texto apresenta indícios de acessibilidade auditiva e/ou acessibilidade visual. O vocabulário do BoW contém cinco termos: libras, legenda, descrição, leitor\_tela e deficiência. Cada frase é representada como um vetor binário de cinco posições:
 
 * P1 = \[1, 1, 0, 0, 1]
 * P2 = \[0, 0, 1, 1, 1]
 * P3 = \[1, 1, 1, 0, 0]
 
-A primeira camada da rede possui dois neurônios. O Neurônio A está calibrado para detectar acessibilidade auditiva (por exemplo, Libras e legendas), enquanto o Neurônio B está calibrado para acessibilidade visual (por exemplo, descrições de imagem e compatibilidade com leitores de tela). Cada neurônio possui um vetor de pesos (um peso por palavra do vocabulário) e um bias (viés). Após a soma ponderada com o bias, aplicamos a função sigmoide para obter uma probabilidade entre 0 e 1.
+A primeira camada da rede possui dois neurônios: O Neurônio A tá calibrado para detectar acessibilidade auditiva, enquanto o Neurônio B está calibrado para acessibilidade visual. Cada neurônio possui um vetor de pesos (um peso por palavra do vocabulário) e um bias (viés).
 
 ---
 
@@ -177,9 +177,9 @@ graph LR
 
 ---
 
-## Interpretação
+## Interpretação / Resposta
 
- Os resultados fazem muito sentido com o que os pesos mostravam. O Neurônio *A* sobe mais quando a frase contém libras e legenda, o que faz sentido para conteúdos direcionados a deficientes auditivos. Na prática, *P1* apresenta ambos e, por isso, alcança $\sigma(z_A)\approx 0.88$, um valor alto que sugere forte evidência auditiva; para o visual, *P1* fica em torno de 0.67, o que significa sinais mais moderados porque faltaram descrição e leitor\_tela, que são os maiores influenciadores do Neurônio *B*.
+ Os resultados fizeram sentido com os pesos dos neurônios. O Neurônio *A* sobe mais quando a frase contém libras e legenda, o que faz sentido para conteúdos direcionados a deficientes auditivos. Na prática, *P1* apresenta ambos e, por isso, alcança $\sigma(z_A)\approx 0.88$, um valor alto que sugere forte evidência auditiva; para o visual, *P1* fica em torno de 0.67, o que significa sinais mais moderados porque faltaram descrição e leitor\_tela, que são os maiores influenciadores do Neurônio *B*.
 
 Já *P2* traz descrição e leitor\_tela, e por isso o Neurônio B (visual) dispara para $\sigma(z_B)\approx 0.85$, indicando conformidade para acessibilidade visual. Ao mesmo tempo, *P2* também atinge $\sigma(z_A)\approx 0.71$, um valor razoável para auditiva, impulsionado por pesos menores (como deficiência) e pelo bias positivo do neurônio A.
 
