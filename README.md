@@ -130,38 +130,46 @@ Em termos numéricos, as probabilidades finais (após a sigmoide) para cada fras
 
 Para visualização da arquitetura (entrada BoW → neurônios da 1ª camada → ativações sigmoides), segue um diagrama **Mermaid** que deixa explícitas as conexões e os pesos principais:
 
-```mermaid
-graph LR
-  subgraph Input[Vocabulário (Bag-of-Words)]
-    LBR[libras (x1)]
-    LGD[legenda (x2)]
-    DSC[descrição (x3)]
-    LTR[leitor_tela (x4)]
-    DEF[deficiência (x5)]
+```graph LR
+  %% Entradas (Bag-of-Words)
+  subgraph Input
+    direction TB
+    LBR["libras (x1)"]
+    LGD["legenda (x2)"]
+    DSC["descrição (x3)"]
+    LTR["leitor_tela (x4)"]
+    DEF["deficiência (x5)"]
   end
 
-  subgraph Layer1[1ª Camada Densa (2 neurônios)]
-    A[Neurônio A (auditiva)\n w=[0.8, 0.6, 0.2, 0.1, 0.5]\n b=0.1]
-    B[Neurônio B (visual)\n w=[0.2, 0.4, 0.9, 0.7, 0.3]\n b=-0.2]
+  %% Primeira camada (2 neurônios)
+  subgraph Layer1
+    direction TB
+    A["Neurônio A (auditiva)\nw=[0.8, 0.6, 0.2, 0.1, 0.5]\nb=0.1"]
+    B["Neurônio B (visual)\nw=[0.2, 0.4, 0.9, 0.7, 0.3]\nb=-0.2"]
   end
 
-  subgraph Activation[Ativação]
-    SA[σ(z_A) → prob. auditiva]
-    SB[σ(z_B) → prob. visual]
+  %% Ativações (sigmoide)
+  subgraph Activation
+    direction TB
+    SA["σ(z_A) → prob. auditiva"]
+    SB["σ(z_B) → prob. visual"]
   end
 
+  %% Conexões e pesos para A
   LBR -->|0.8| A
   LGD -->|0.6| A
   DSC -->|0.2| A
   LTR -->|0.1| A
   DEF -->|0.5| A
 
+  %% Conexões e pesos para B
   LBR -->|0.2| B
   LGD -->|0.4| B
   DSC -->|0.9| B
   LTR -->|0.7| B
   DEF -->|0.3| B
 
+  %% Saídas da camada
   A --> SA
   B --> SB
 ```
